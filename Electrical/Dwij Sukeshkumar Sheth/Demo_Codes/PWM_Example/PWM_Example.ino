@@ -18,14 +18,14 @@ void setup() {
   // declare pin 9 to be an output:
   pinMode(led, OUTPUT);//If we do not include this line the LED will not glow as pin 9 dosent output anything.
   Serial.begin(9600);  //This is used to start the Serial monitor at a baud rate of 9600 to display the relevant data on the screen.
-  Serial.println('///////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n');
-  Serial.println('LED IS initialized on PIN:\t');
+  Serial.println("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+  Serial.println("LED IS initialized on PIN:\t");
   Serial.print(led);
-  Serial.println('The Initial Brightness(PWM) is:\t');
+  Serial.println("The Initial Brightness(PWM) is:\t");
   Serial.print(brightness);
-  Serial.println('The Fade Amount is:\t');
+  Serial.println("The Fade Amount is:\t");
   Serial.print(fadeAmount);
-  Serial.println('///////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n');
+  Serial.println("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
   Serial.println('Execution Starts Now:\n');
 }
  
@@ -43,7 +43,7 @@ void loop() {
     fadeAmount = -fadeAmount ;//Sign change is done here for reversal of direction
   }
 
-  Serial.println('The Current PWM Value is:\t ');   //Prints the current pwm value in the Serial Monitor so that you can analyse whats going on
+  Serial.println("The Current PWM Value is:\t ");   //Prints the current pwm value in the Serial Monitor so that you can analyse whats going on
   Serial.print(brightness);
   
   // wait for 30 milliseconds to see the dimming effect (Can be modified as per your liking)
