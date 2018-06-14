@@ -1,0 +1,25 @@
+1.Take the short leg of the LED and insert it in the GND pin.
+
+2.Take either leg of the resistor and place it in pin 9.
+
+3.Connect the long leg of the LED with the other leg of the resistor using an Breadboard.
+
+4.Plug the Arduino into your computer with the USB cable
+
+5.Open up the Arduino IDE
+Open the sketch for this section.
+
+6.Click the Verify button (top left). The button will turn orange and then blue once finished.
+
+7.Click the Upload button. The button will turn orange and then blue when finished.
+
+8.Launch the Serial Monito and set the baud rate to 9600
+
+9.See the printed Contents to get an idea what is the current pwm value and how the led reacts to it.
+
+10.Similarly understand that we can control a motor usng the same principle.
+
+11. Read the Comments in the Program Carefully for better understanding of what is going on.
+
+--Author
+Dwij Sukeshkumar Sheth
