@@ -1,0 +1,13 @@
+{
+  "name": "allLib",
+  "keywords": "BaseMotors,Pneumatics,Led",
+  "description": "for running basemotors and pneumatics",
+  "include": "Arduino/allLib",
+  "dependencies":
+  {
+    "name": "allLib",
+    "frameworks": "arduino"
+  },
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}
