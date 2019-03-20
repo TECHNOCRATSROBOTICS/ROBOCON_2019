@@ -1,0 +1,19 @@
+pip3 uninstall serial
+pip3 install pyserial
+export DISPLAY=:0
+python3 poora_controller.py
+
+left 16 right 16
+up down 15
+
+10 clockwise 
+5  anticlockwise
+
+2 left right
+1 for back
+
+
+1011 forward
+1211 back
+1121 right
+1101 left

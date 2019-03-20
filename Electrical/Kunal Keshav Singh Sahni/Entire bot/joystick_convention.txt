@@ -1,0 +1,14 @@
+leftxdir leftydir rightxdir rightydir
+
+
+0111 left x left
+2111 left x right
+1011 left y up
+1211 left y down
+
+
+
+1101 right x right
+1121 right x left
+1112 right y up
+1110 right y down 

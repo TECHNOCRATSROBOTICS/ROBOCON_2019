@@ -1,0 +1,194 @@
+ // all the motor pins
+int fl_dir = 9;
+int fr_dir = 10;
+int bl_dir = 4;
+int br_dir = 6;
+int fl_pwm = 8;
+int fr_pwm = 11;
+int bl_pwm = 5;
+int br_pwm = 7;
+
+void setup() {
+  // put your setup code here, to run once:
+ 
+pinMode(fl_dir,OUTPUT);
+pinMode(fr_dir,OUTPUT);
+pinMode(bl_dir,OUTPUT);
+pinMode(br_dir,OUTPUT);
+pinMode(fl_pwm,OUTPUT);
+pinMode(fr_pwm,OUTPUT);
+pinMode(bl_pwm,OUTPUT);
+pinMode(br_pwm,OUTPUT);
+Serial.begin(9600);
+}
+
+void Speed(int val){
+  analogWrite(fl_pwm,val);
+  analogWrite(fr_pwm,val);
+  analogWrite(bl_pwm,val);
+  analogWrite(br_pwm,val);
+}
+
+// all the fucking variables 
+int hat_up,hat_down,hat_left,hat_right,up,down,left,right,start,back,front_left,front_right,left_x,left_y,right_x,right_y,lt1,rt1,left_x_dir,left_y_dir,right_x_dir,right_y_dir;
+
+void Digitest(){
+  if(hat_up == 1)
+   digitalWrite(fl_pwm,HIGH);
+  else if(hat_up == 0)
+  digitalWrite(fl_pwm,LOW);
+   if(hat_down == 1)
+   digitalWrite(fr_pwm,HIGH);
+  else if(hat_down == 0)
+  digitalWrite(fr_pwm,LOW);
+
+    if(hat_left == 1)
+   digitalWrite(bl_pwm,HIGH);
+  else if(hat_left == 0)
+  digitalWrite(bl_pwm,LOW);
+
+  if(hat_right == 1)
+   digitalWrite(br_pwm,HIGH);
+  else if(hat_right == 0)
+  digitalWrite(br_pwm,LOW);
+}
+
+
+  void North_West(int val_north, int val_west){
+    digitalWrite(fr_dir,HIGH);
+    digitalWrite(bl_dir,HIGH);
+    analogWrite(fl_pwm,0);
+    analogWrite(br_pwm,0);
+    analogWrite(fr_pwm,val_north);
+    analogWrite(bl_pwm,val_west);
+  }
+
+    void North_East(int val_north, int val_east){
+    digitalWrite(fl_dir,HIGH);
+    digitalWrite(br_dir,HIGH);
+    analogWrite(fr_pwm,0);
+    analogWrite(bl_pwm,0);
+    analogWrite(fl_pwm,val_north);
+    analogWrite(br_pwm,val_east);
+  }
+
+    void South_West(int val_north, int val_west){
+    digitalWrite(fl_dir,LOW);
+    digitalWrite(br_dir,LOW);
+    analogWrite(fr_pwm,0);
+    analogWrite(bl_pwm,0);
+    analogWrite(fl_pwm,val_north);
+    analogWrite(br_pwm,val_west);
+  }
+
+    void South_East(int val_north, int val_west){
+    digitalWrite(fr_dir,LOW);
+    digitalWrite(bl_dir,LOW);
+    analogWrite(fl_pwm,0);
+    analogWrite(br_pwm,0);
+    analogWrite(fr_pwm,val_north);
+    analogWrite(bl_pwm,val_west);
+  }
+
+  
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  // MAGIC FUNCTION 
+int s[22];
+  int i=0;
+  while(1){
+  if(Serial.available()){
+  s[i] = Serial.read(); 
+//  Serial.print(s[i]);
+  if(s[i]==110){
+    i=-1;
+  }
+  i++;
+  if(i==0){
+    break;
+  }
+  if(i>=22){
+    i=0;
+    break;
+  }
+  }
+  }
+
+  // all the buttons 
+  hat_up = s[0] - '0';
+  hat_down = s[1] - '0';
+  hat_left = s[2] - '0';
+  hat_right = s[3] - '0';
+  up = s[4] - '0';
+  down = s[5] - '0';
+  left = s[6] - '0';
+  right = s[7] - '0';
+  start = s[8] - '0';
+  back = s[9] - '0';
+  front_left = s[10] - '0';
+  front_right = s[11] - '0';
+  left_x_dir = s[18] - '0';
+  left_y_dir = s[19] - '0';
+  right_x_dir = s[20] - '0';
+  right_y_dir = s[21] - '0';
+
+  
+ // all the axis 
+
+// ALL THY LOGIC .....
+if((left_x_dir==1) && (left_y_dir==1) && (right_x_dir==1) && (right_y_dir==1))
+{
+  Speed(0);
+}
+
+if((left_x_dir == 0) && (left_y_dir==0)){
+   int val_north = map((s[13]-'0'),0,9,0,255);
+   int val_west = map((s[12]-'0'),0,9,0,255);
+   North_West(val_north,val_west);
+}
+if((left_x_dir == 2) && (left_y_dir==0)){
+   int val_north = map((s[13]-'0'),0,9,0,255);
+   int val_west = map((s[12]-'0'),0,9,0,255);
+   North_East(val_north,val_west);
+}
+if((left_x_dir == 0) && (left_y_dir==2)){
+   int val_north = map((s[13]-'0'),0,9,0,255);
+   int val_west = map((s[12]-'0'),0,9,0,255);
+   South_West(val_north,val_west);
+}
+if((left_x_dir == 0) && (left_y_dir==0)){
+   int val_north = map((s[13]-'0'),0,9,0,255);
+   int val_west = map((s[12]-'0'),0,9,0,255);
+   South_East(val_north,val_west);
+}
+if(left_x_dir == 0){
+//  SideWayLeft();
+  int val = map((s[12]-'0'),0,9,0,255);
+  Speed(val);
+}
+
+if(left_x_dir == 2){
+  //SideWayRight();
+  int val = map((s[12]-'0'),0,9,0,255);
+  Speed(val); 
+}
+
+if(left_y_dir == 0){
+  //Forward();
+  int val = map((s[13]-'0'),0,9,0,255);
+  Speed(val);
+}
+
+if(left_y_dir == 2){
+  //Backward();
+  int val = map((s[13]-'0'),0,9,0,255);
+  Speed(val);
+}
+
+
+ 
+ //Digitest();
+ 
+}
